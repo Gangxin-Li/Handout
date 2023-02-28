@@ -2,6 +2,7 @@
 
 # Bubble Sort
 def Bubble_sort(array):
+    # https://www.htmlsymbols.xyz/ 
     print("Bubble_sort time complexity: O(n"+'\u00B2'+")")
     # recored exchange times
     times = 0
@@ -35,36 +36,64 @@ def Insertion_sort(array):
     return array
 
 # Merge Sort
+# trades off memory space for speed 
 def merge(left,right):
     if len(left) == 0:
         return right
     if len(right) == 0:
         return left
     res = []
-    left_index,right_index = 0,0
-    while len(res)<len(left)+len(right):
-        if left[left_index] <= right[right_index]:
-            res.append(left[left_index])
-            left_index += 1
+    indexleft = 0
+    indexright = 0
+    while len(res) < len(left)+len(right):
+        if left[indexleft] <= right[indexright]:
+            res.append(left[indexleft])
+            indexleft +=1
         else:
-            res.append(right[right_index])
-            right_index += 1
-        if left_index == len(left):
-            res+=right[right_index:]
-        if right_index == len(right):
-            res+=left[left_index:]
+            res.append(right[indexright])
+            indexright +=1
+        if indexleft == len(left):
+            res += right[indexright:]
+            break
+        if indexright == len(right):
+            res += left[indexleft:]
+            break
     return res
+# print("Merge_Sort Time complexity: O(nlog"+'\u2082'+"n) ")
 def Merge_Sort(array):
-    length = len(array)
-    if length < 2:
+    if len(array) < 2:
         return array
-    midpoint = len(array) // 2
-    return merge(left=Merge_Sort(array[:midpoint]),right=Merge_Sort(array[midpoint:]))
+    mid_point = len(array)//2
+    return merge(left=Merge_Sort(array[:mid_point]),right=Merge_Sort(array[mid_point:]))
+
+
+# Quick Sort
+# trades off memory space for speed
+# print("Quick_Sort time complexity: O(nlog\u2082n)")
+from random import randint
+def Quick_Sort(array):
     
+    if len(array)<2:
+        return array
+    left, same, right = [],[],[]
+    p = array[randint(0,len(array)-1)]
+    for item in array:
+        if item < p:
+            left.append(item)
+        elif item == p:
+            same.append(item)
+        else:
+            right.append(item)
+    return Quick_Sort(left) + same + Quick_Sort(right)
+
+
 if __name__ == '__main__':
     nums = [1,67,3,2,6,7,1,3,6,7,2]
     print(Bubble_sort(nums.copy()))
     print(Insertion_sort(nums.copy()))
+    print("Merge_Sort Time complexity: O(nlog"+'\u2082'+"n) ")
     print(Merge_Sort(nums.copy()))
+    print("Quick_Sort average time complexity: O(nlog\u2082n) Best time complexity: O(n) Worest time complexity: O(n\u00B2)")
+    print(Quick_Sort(nums.copy()))
 
 
