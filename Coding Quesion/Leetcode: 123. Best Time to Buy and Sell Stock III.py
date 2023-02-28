@@ -34,8 +34,12 @@ class Solution:
         second_hold, second_sell = -float('inf'),0
 
         for price in prices:
+            # Finally we sell our second stock to get the money
             second_sell = max(second_sell, second_hold + price)
+            # and then we need to buy the second one, here we use the current money, that is first_sell - current
             second_hold = max(second_hold, first_sell - price)
+            # Then we can sell it as a profile, here we can use current price + (-price) to get the profile.
             first_sell = max(first_sell, first_hold + price)
+            # First, if you want to buy a stock, we should pay for the price, so it is - number
             first_hold = max(first_hold,0 - price)
         return second_sell
