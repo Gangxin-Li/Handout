@@ -1,0 +1,11 @@
+https://www.hackerrank.com/challenges/earnings-of-employees/problem?isFullScreen=true&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
+
+/*
+Enter your query here.
+*/
+
+SELECT months*salary, COUNT(*)
+FROM Employee
+GROUP BY months*salary 
+ORDER BY months*salary DESC
+LIMIT 1
